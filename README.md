@@ -2,19 +2,23 @@
 This is an add-on for the [ServiceNow integration](https://store.servicenow.com/sn_appstore_store.do#!/store/application/5950d7444f2231000e9fa88ca310c78c/4.0.2) to add a `Post to chat` checkbox to the Engage with xMatters form. When checked, this can create a room in the configured chat application. 
 
 <kbd>
-  <img src="/media/EngageScreenshot.png">
+  <img src="/media/EngageScreenshot.png" width="575">
 </kbd>
 
+---------
 
 <kbd>
   <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
 </kbd>
 
 
+---------
+
 
 # Pre-Requisites
 * ServiceNow account
-* Version 4.0.2 or higher of the ServiceNow integration
+* [Version 4.0.2](https://store.servicenow.com/sn_appstore_store.do#!/store/application/5950d7444f2231000e9fa88ca310c78c/4.0.2) or higher of the ServiceNow integration
+* [Slack shared library](https://github.com/xmatters/xm-labs-slack) - Shared library for interacting with Slack. 
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
