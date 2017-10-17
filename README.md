@@ -1,9 +1,10 @@
-# Post to Chat for the Engage with xMatters form in the ServiceNow integration
+# Post to Chat for Engage with xMatters
 This is an add-on for the [ServiceNow integration](https://store.servicenow.com/sn_appstore_store.do#!/store/application/5950d7444f2231000e9fa88ca310c78c/4.0.2) to add a `Post to chat` checkbox to the Engage with xMatters form. When checked, this can create a room in the configured chat application. 
 
 <kbd>
   <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
 </kbd>
+
 
 <kbd>
   <img src="/media/EngageScreenshot.png">
@@ -15,43 +16,31 @@ This is an add-on for the [ServiceNow integration](https://store.servicenow.com/
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
-* [ExampleCommPlan.zip](ExampleCommPlan.zip) - This is an example comm plan to help get started. (If it doesn't make sense to have a full communication plan, then you can just use a couple javascript files like the one below.)
-* [EmailMessageTemplate.html](EmailMessageTemplate.html) - This is an example HTML template for emails and push messages. 
-* [FileA.js](FileA.js) - An example javascript file to be pasted into a Shared Library in the Integration builder. Note the comments
+* [ServiceNow_Add_Chat.xml](ServiceNow_Add_Chat.xml) - The update set to add the checkbox. 
+
 
 # How it works
-Add some info here detailing the overall architecture and how the integration works. The more information you can add, the more helpful this sections becomes. For example: An action happens in Application XYZ which triggers the thingamajig to fire a REST API call to the xMatters inbound integration on the imported communication plan. The integration script then parses out the payload and builds an event and passes that to xMatters. 
+A checkbox is added to the Engage with xMatters form. The value of this checkbox is passed from client side form to server side via the ajax call, which is then added to the Engage with xMatters record. The `xMatters Task` business rule fires when this record is inserted and a payload is built, including the checkbox value and sent off to the xMatters Inbound Integration script. Either the `Engage with xMatters` or the `Conference Bridge` integration scripts are invoked, depending on the value of the Conference Bridge drop down passed through. 
+In the inbound script, code determines the value of the chat checkbox and then triggers the api requests to create a room in the configured chat application. 
 
 # Installation
-Details of the installation go here. 
+
+## ServiceNow set up
+1. Login to the ServiceNow instance as an administrator. Navigate to `Retrieved Update Sets` and click the `Import Update Set from XML` link. 
+
+<kbd>
+  <img src="/media/ImportUpdateSet.png">
+</kbd>
+
+2. Import the [ServiceNow_Add_Chat.xml](ServiceNow_Add_Chat.xml) file. Click Preview, then Commit. 
+
 
 ## xMatters set up
-1. Steps to create a new Shared Library or (in|out)bound integration or point them to the xMatters online help to cover specific steps; i.e., import a communication plan (link: http://help.xmatters.com/OnDemand/xmodwelcome/communicationplanbuilder/exportcommplan.htm)
-2. Add this code to some place on what page:
-   ```
-   var items = [];
-   items.push( { "stuff": "value"} );
-   console.log( 'Do stuff' );
-   ```
-
-
-## Application ABC set up
-Any specific steps for setting up the target application? The more precise you can be, the better!
-
-Images are encouraged. Adding them is as easy as:
-```
-<kbd>
-  <img src="media/cat-tax.png" width="200" height="400">
-</kbd>
-```
-
-<kbd>
-  <img src="media/cat-tax.png" width="200" height="400">
-</kbd>
-
 
 # Testing
-Be specific. What should happen to make sure this code works? What would a user expect to see? 
+View an existing Incident and click the Engage with xMatters button. In the dialog displayed, enter the required information and mark the `Post to Chat?` checkbox. Click Submit. 
+
+The notifications will be sent to the targeted recipients and a chat room will be created with a name matching the Incident number. 
 
 # Troubleshooting
-Optional section for how to troubleshoot. Especially anything in the source application that an xMatters developer might not know about, or specific areas in xMatters to look for details - like the Activity Stream? 
+After submitting a new Enage with xMatters request, inspect the Activity Stream for either the Engage with xMatters or the Conference Bridge, depending on the value of the Conference Bridge drop down. The activity stream will have the value of the `chat` checkbox and any subsequent errors related to creating the chat room. 
