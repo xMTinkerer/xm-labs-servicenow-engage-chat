@@ -53,9 +53,11 @@ In the inbound script, code determines the value of the chat checkbox and then t
 ```javascript
 if( trigger.task_chat ) {
     
+    // Create the channel using the Incident Number as the name. Then get the Team details. 
     var channel = Slack.createChannel( trigger.properties.number.toLowerCase() );
     var team    = Slack.getTeam();
 
+    // Build a message to display to users entering the room. 
     var text = "ServiceNow Incident <" + trigger.properties.servicenowurl + '/nav_to.do?uri=incident.do?sys_id=' + trigger.properties.sys_id + '|' + trigger.properties.number + '>: ' + trigger.properties.short_description;
     var payload = { 
       "channel": "#" + channel.channel.name, 
@@ -64,6 +66,7 @@ if( trigger.task_chat ) {
       "text": text
     };
 
+    // Post the message to Slack, then set the chat_link properties so the notifications contain the Slack room link. 
     Slack.postMessage( payload );
     trigger.properties.chat_link = 'https://' + team.name + '.slack.com/messages/' + trigger.properties.number;
     trigger.properties.chat_link_disp = "visible";
