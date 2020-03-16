@@ -8,7 +8,9 @@ This is an add-on for the [ServiceNow integration](https://store.servicenow.com/
 ---------
 
 <kbd>
-  <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
+<a href="https://support.xmatters.com/hc/en-us/community/topics">
+   <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
+</a>
 </kbd>
 
 
@@ -42,7 +44,7 @@ In the inbound script, code determines the value of the chat checkbox and then t
 
 
 ## xMatters set up
-1. Login as a developer and navigate to the Developer tab > ServiceNow 4.0 Comm Plan.
+1. Login as a developer and navigate to the Workflows section. Open the ServiceNow workflow (the name will depend on the version installed). 
 2. Install the [Slack](https://github.com/xmatters/xm-labs-slack/) shared library. For other chat applications, add the necessary code to create the room and post a message. **NOTE**: Make sure to create the Slack endpoint!
 3. Navigate to the Properties and add two new properties:
 
